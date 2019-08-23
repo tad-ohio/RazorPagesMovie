@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,13 +8,21 @@ namespace RazorPagesMovie.Pages
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class ErrorModel : PageModel
     {
+        #region Properties
+
         public string RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
+        #endregion
+
+        #region Actions
+
         public void OnGet()
         {
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            this.RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
+
+        #endregion
     }
 }

@@ -1,30 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies
 {
     public class CreateModel : PageModel
     {
-        private readonly RazorPagesMovie.Models.RazorPagesMovieContext _context;
+        #region Variables
 
-        public CreateModel(RazorPagesMovie.Models.RazorPagesMovieContext context)
+        private readonly RazorPagesMovieContext _context;
+
+        #endregion
+
+        #region Constructors
+
+        public CreateModel(RazorPagesMovieContext context)
         {
-            _context = context;
+            this._context = context;
         }
+
+        #endregion
+
+        #region Properties
+
+        [BindProperty]
+        public Movie Movie { get; set; }
+
+        #endregion
+
+        #region Actions
 
         public IActionResult OnGet()
         {
             return Page();
         }
-
-        [BindProperty]
-        public Movie Movie { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -33,10 +45,12 @@ namespace RazorPagesMovie.Pages.Movies
                 return Page();
             }
 
-            _context.Movie.Add(Movie);
-            await _context.SaveChangesAsync();
+            this._context.Movie.Add(this.Movie);
+            await this._context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Index");
         }
+
+        #endregion
     }
 }

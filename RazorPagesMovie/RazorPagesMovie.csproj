@@ -10,4 +10,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

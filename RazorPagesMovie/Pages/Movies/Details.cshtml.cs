@@ -1,24 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies
 {
     public class DetailsModel : PageModel
     {
-        private readonly RazorPagesMovie.Models.RazorPagesMovieContext _context;
+        #region Variables
 
-        public DetailsModel(RazorPagesMovie.Models.RazorPagesMovieContext context)
+        private readonly RazorPagesMovieContext _context;
+
+        #endregion
+
+        #region Constructors
+
+        public DetailsModel(RazorPagesMovieContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
+        #endregion
+
+        #region Properties
+
+        [BindProperty]
         public Movie Movie { get; set; }
+
+        #endregion
+
+        #region Actions
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,13 +41,15 @@ namespace RazorPagesMovie.Pages.Movies
                 return NotFound();
             }
 
-            Movie = await _context.Movie.FirstOrDefaultAsync(m => m.ID == id);
+            this.Movie = await this._context.Movie.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Movie == null)
+            if (this.Movie == null)
             {
                 return NotFound();
             }
             return Page();
         }
+
+        #endregion
     }
 }

@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesMovie.Pages
 {
     public class ContactModel : PageModel
     {
+        #region Properties
+
         public string Message { get; set; }
+
+        #endregion
+
+        #region Actions
 
         public void OnGet()
         {
-            Message = "Your contact page.";
+            this.Message = "Your contact page.";
         }
+
+        #endregion
     }
 }
